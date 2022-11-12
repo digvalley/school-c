@@ -15,16 +15,17 @@ export default function Home() {
         <link rel='icon' href='/favicon.ico' />
       </Head>
       <Header
-        initial={{ y: -100 }}
+        initial={{ y: -200 }}
         animate={{ y: 0 }}
         transition={{
           duration: 0.6,
           type: 'spring',
           stiffness: 100,
-          delay: 0.5,
+          delay: 0.3,
         }}
       >
-        Julekalender 22
+        Julekalender{' '}
+        <span style={{ color: 'black', fontSize: '5rem' }}>&apos;22</span>
       </Header>
       <Calendar
         initial={{ x: 900 }}
@@ -32,7 +33,7 @@ export default function Home() {
         transition={{ duration: 0.6, type: 'spring', stiffness: 100 }}
       >
         {days.map((day) => (
-          <Tile disabled={day === 1} key={'c_' + day}>
+          <Tile disabled={day === 1} today={day === 4} key={'c_' + day}>
             {day}
           </Tile>
         ))}
@@ -78,7 +79,8 @@ const Tile = styled.div`
   border-radius: 0.5rem;
   border: 1px solid white;
   cursor: pointer;
-  color: ${(props) => (props.disabled ? '#00000070' : 'black')};
+  color: ${(props) =>
+    props.disabled ? '#00000070' : props.today ? 'red' : 'black'};
   background: ${(props) => (props.disabled ? '#ffffff20' : '#ffffffc2')};
   transition: all 0.2s ease-in-out;
   &:hover {
